@@ -3,6 +3,7 @@
 	import Hero from '$lib/components/Hero.svelte';
 	import ProblemSection from '$lib/components/ProblemSection.svelte';
 	import FeaturesSection from '$lib/components/FeaturesSection.svelte';
+	import IntegrationsSection from '$lib/components/IntegrationsSection.svelte';
 	import ArchitectureSection from '$lib/components/ArchitectureSection.svelte';
 	import AISection from '$lib/components/AISection.svelte';
 	import GovernanceSection from '$lib/components/GovernanceSection.svelte';
@@ -28,6 +29,7 @@
 	<Hero />
 	<ProblemSection />
 	<FeaturesSection />
+	<IntegrationsSection />
 	<ArchitectureSection />
 	<AISection />
 	<GovernanceSection />

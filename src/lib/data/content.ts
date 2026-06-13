@@ -2,11 +2,12 @@ export const brand = {
 	name: 'UpSale AI',
 	tagline: 'Прогнозируйте спрос. Оптимизируйте запасы. Растите выручку.',
 	description:
-		'Платформа на базе ИИ для прогнозирования спроса, оптимизации запасов и интеллектуальной поддержки решений в ритейле и дистрибуции.'
+		'Платформа на базе ИИ для прогнозирования спроса и оптимизации запасов с нативной интеграцией 1С:УТ 11 и подключением к другим ERP, магазинам и маркетплейсам.'
 } as const;
 
 export const navLinks = [
 	{ label: 'Платформа', href: '#platform' },
+	{ label: 'Интеграции', href: '#integrations' },
 	{ label: 'Архитектура', href: '#architecture' },
 	{ label: 'ИИ-движок', href: '#ai-engine' },
 	{ label: 'Результаты', href: '#results' },
@@ -28,11 +29,11 @@ export const ui = {
 } as const;
 
 export const hero = {
-	badge: 'Корпоративная платформа прогнозирования на ИИ',
+	badge: 'Интеграция с 1С:УТ 11 из коробки',
 	title: 'Трансформируйте прогнозирование продаж',
 	titleAccent: 'с помощью ИИ',
 	subtitle:
-		'Прогнозируйте спрос, оптимизируйте запасы и автоматизируйте планирование с помощью машинного обучения и объяснимого ИИ.',
+		'Подключайте 1С:Управление торговлей 11 за дни, а не месяцы — и прогнозируйте спрос, оптимизируйте запасы с помощью машинного обучения и объяснимого ИИ.',
 	dashboard: {
 		analytics: 'Аналитика',
 		intelligence: 'Аналитика спроса',
@@ -51,7 +52,14 @@ export const sections = {
 		eyebrow: 'Платформа',
 		title: 'Всё для прогнозирования и оптимизации',
 		subtitle:
-			'Полный стек аналитики — от сырых данных о продажах до управляемых и объяснимых решений по запасам.'
+			'Полный стек аналитики — от данных 1С:УТ 11 и других источников до управляемых и объяснимых решений по запасам.'
+	},
+	integrations: {
+		eyebrow: 'Интеграции',
+		title: 'Нативная связка с 1С:УТ 11',
+		subtitle:
+			'Готовый коннектор для 1С:Управление торговлей 11 — и открытая архитектура для подключения других ERP, интернет-магазинов и маркетплейсов.',
+		connectorsTitle: 'И другие системы — без привязки к одному вендору'
 	},
 	architecture: {
 		eyebrow: 'Архитектура',
@@ -192,9 +200,9 @@ export const features = [
 		icon: 'shield-check'
 	},
 	{
-		title: 'Интеграция с ERP',
+		title: '1С:УТ 11 из коробки',
 		description:
-			'Нативные коннекторы для 1С:Предприятие OData, REST API и CSV-пайплайнов.',
+			'Готовый OData-коннектор для 1С:Управление торговлей 11: продажи, остатки, номенклатура и заказы — без ручной выгрузки.',
 		icon: 'plug'
 	},
 	{
@@ -206,7 +214,7 @@ export const features = [
 ] as const;
 
 export const architectureLayers = [
-	{ label: 'Источники данных', description: 'Продажи, остатки, промо, ERP' },
+	{ label: 'Источники данных', description: '1С:УТ 11 (OData), магазины, маркетплейсы' },
 	{ label: 'API-слой', description: 'REST-эндпоинты FastAPI' },
 	{ label: 'Движок прогнозирования', description: 'CatBoost · LightGBM · Hybrid' },
 	{ label: 'Движок оптимизации', description: 'Заказы · сценарное планирование' },
@@ -215,12 +223,65 @@ export const architectureLayers = [
 ] as const;
 
 export const techBadges = [
+	'1С:УТ 11',
+	'OData',
 	'FastAPI',
 	'PostgreSQL',
 	'CatBoost',
 	'LightGBM',
 	'SHAP',
 	'Docker'
+] as const;
+
+export const integrationPrimary = {
+	badge: 'Основная интеграция',
+	title: '1С:Управление торговлей 11',
+	subtitle: 'Готовый коннектор — развёртывание за дни',
+	description:
+		'UpSale AI напрямую подключается к вашей базе 1С:УТ 11 через стандартный OData-сервис. Продажи, остатки, номенклатура и цены синхронизируются автоматически — данные для прогнозирования всегда актуальны, без ручных выгрузок в Excel.',
+	protocol: 'OData / HTTP-сервисы 1С',
+	syncMode: 'Плановая и событийная синхронизация',
+	dataTitle: 'Синхронизируемые данные'
+} as const;
+
+export const integrationDataEntities = [
+	'Продажи и отгрузки',
+	'Остатки и доступность',
+	'Номенклатура и характеристики',
+	'Цены и скидки',
+	'Заказы поставщикам',
+	'Промоакции и маркетинг'
+] as const;
+
+export const integrationConnectors = [
+	{
+		title: 'Другие конфигурации 1С',
+		description:
+			'Универсальный OData-коннектор для 1С:ERP, 1С:Розница, 1С:Комплексная автоматизация и кастомных доработок.',
+		examples: '1С:ERP · 1С:Розница · 1С:КА',
+		icon: 'database'
+	},
+	{
+		title: 'Интернет-магазины',
+		description:
+			'Подключение e-commerce платформ для учёта онлайн-продаж в едином прогнозе спроса по всем каналам.',
+		examples: 'Bitrix · OpenCart · WooCommerce · custom',
+		icon: 'store'
+	},
+	{
+		title: 'Маркетплейсы',
+		description:
+			'Импорт заказов и остатков с Wildberries, Ozon, Яндекс Маркет и других площадок.',
+		examples: 'WB · Ozon · Яндекс Маркет',
+		icon: 'shopping-bag'
+	},
+	{
+		title: 'REST API и CSV',
+		description:
+			'Открытый API и файловые пайплайны для WMS, TMS, BI-систем и любых внешних источников данных.',
+		examples: 'REST · CSV · SFTP',
+		icon: 'link'
+	}
 ] as const;
 
 export const aiCapabilities = [
@@ -304,6 +365,8 @@ export const techStack = [
 	{ name: 'CatBoost', category: 'ML' },
 	{ name: 'LightGBM', category: 'ML' },
 	{ name: 'SHAP', category: 'Объяснимость' },
+	{ name: '1С:УТ 11', category: 'Интеграция' },
+	{ name: 'OData', category: 'Интеграция' },
 	{ name: 'REST API', category: 'Интеграция' }
 ] as const;
 
@@ -315,6 +378,6 @@ export const heroMetrics = [
 ] as const;
 
 export const seo = {
-	ogTitle: 'UpSale AI — ИИ-прогнозирование спроса',
-	twitterTitle: 'UpSale AI — ИИ-прогнозирование спроса'
+	ogTitle: 'UpSale AI — ИИ-прогнозирование с интеграцией 1С:УТ 11',
+	twitterTitle: 'UpSale AI — ИИ-прогнозирование с интеграцией 1С:УТ 11'
 } as const;
