@@ -2,7 +2,7 @@
 	import { motion } from '@humanspeak/svelte-motion';
 	import { ArrowRight, CheckCircle2, Eye, Shield } from '@lucide/svelte';
 	import SectionHeader from './SectionHeader.svelte';
-	import { governanceFlows } from '$lib/data/content';
+	import { governanceFlows, sections } from '$lib/data/content';
 
 	const colorMap = {
 		emerald: {
@@ -31,9 +31,10 @@
 
 	<div class="relative mx-auto max-w-7xl px-6 lg:px-8">
 		<SectionHeader
-			eyebrow="Governance"
-			title="AI Decisions with Human Oversight"
-			subtitle="Confidence-based routing ensures the right balance between automation speed and human judgment."
+			id="governance-heading"
+			eyebrow={sections.governance.eyebrow}
+			title={sections.governance.title}
+			subtitle={sections.governance.subtitle}
 		/>
 
 		<div class="grid gap-6 lg:grid-cols-3">
@@ -49,7 +50,7 @@
 				>
 					{#if i < governanceFlows.length - 1}
 						<div class="absolute top-1/2 -right-3 z-10 hidden -translate-y-1/2 lg:block" aria-hidden="true">
-							<ArrowRight size={20} class="text-text-muted/40" />
+							<ArrowRight size={20} class="text-muted/40" />
 						</div>
 					{/if}
 
@@ -63,23 +64,23 @@
 								<Shield size={20} class={colors.text} />
 							{/if}
 						</div>
-						<span class="rounded-full border border-border px-2.5 py-0.5 text-xs font-mono text-text-muted">
+						<span class="rounded-full border border-line px-2.5 py-0.5 text-xs font-mono text-muted">
 							{flow.threshold}
 						</span>
 					</div>
 
-					<h3 id="governance-heading" class="text-lg font-semibold text-text">{flow.level}</h3>
+					<h3 class="text-lg font-semibold text-foreground">{flow.level}</h3>
 					<div class="my-3 flex items-center gap-2">
 						<ArrowRight size={14} class={colors.text} />
 						<span class="text-base font-medium {colors.text}">{flow.action}</span>
 					</div>
-					<p class="text-sm leading-relaxed text-text-muted">{flow.description}</p>
+					<p class="text-sm leading-relaxed text-muted">{flow.description}</p>
 				</motion.div>
 			{/each}
 		</div>
 
 		<motion.div
-			class="mt-12 rounded-2xl border border-border bg-card/40 p-6 backdrop-blur-sm sm:p-8"
+			class="mt-12 rounded-2xl border border-line bg-card/40 p-6 backdrop-blur-sm sm:p-8"
 			initial={{ opacity: 0 }}
 			whileInView={{ opacity: 1 }}
 			viewport={{ once: true }}
@@ -90,9 +91,9 @@
 					<Shield size={24} class="text-primary" />
 				</div>
 				<div class="flex-1">
-					<p class="font-medium text-text">Full audit trail for every decision</p>
-					<p class="mt-1 text-sm text-text-muted">
-						Every forecast, approval, and override is logged with model version, confidence score, and SHAP context.
+					<p class="font-medium text-foreground">{sections.governance.auditTitle}</p>
+					<p class="mt-1 text-sm text-muted">
+						{sections.governance.auditDescription}
 					</p>
 				</div>
 			</div>

@@ -9,17 +9,17 @@
 	import MetricsSection from '$lib/components/MetricsSection.svelte';
 	import CTASection from '$lib/components/CTASection.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import { brand } from '$lib/data/content';
+	import { brand, seo } from '$lib/data/content';
 </script>
 
 <svelte:head>
 	<title>{brand.name} — {brand.tagline}</title>
 	<meta name="description" content={brand.description} />
-	<meta property="og:title" content="{brand.name} — AI Demand Forecasting" />
+	<meta property="og:title" content="{seo.ogTitle}" />
 	<meta property="og:description" content={brand.description} />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="{brand.name} — AI Demand Forecasting" />
+	<meta name="twitter:title" content="{seo.twitterTitle}" />
 	<meta name="twitter:description" content={brand.description} />
 </svelte:head>
 

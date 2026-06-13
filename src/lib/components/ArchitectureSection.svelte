@@ -2,7 +2,7 @@
 	import { motion } from '@humanspeak/svelte-motion';
 	import { ArrowDown, Database, Server } from '@lucide/svelte';
 	import SectionHeader from './SectionHeader.svelte';
-	import { architectureLayers, techBadges } from '$lib/data/content';
+	import { architectureLayers, sections, techBadges } from '$lib/data/content';
 </script>
 
 <section id="architecture" class="section-padding relative overflow-hidden" aria-labelledby="arch-heading">
@@ -10,9 +10,10 @@
 
 	<div class="relative mx-auto max-w-7xl px-6 lg:px-8">
 		<SectionHeader
-			eyebrow="Architecture"
-			title="Built for Enterprise Scale"
-			subtitle="A modular pipeline from data ingestion to governed business decisions — designed for on-premise and cloud deployment."
+			id="arch-heading"
+			eyebrow={sections.architecture.eyebrow}
+			title={sections.architecture.title}
+			subtitle={sections.architecture.subtitle}
 		/>
 
 		<div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -25,13 +26,13 @@
 						viewport={{ once: true, margin: '-40px' }}
 						transition={{ delay: i * 0.1, duration: 0.5 }}
 					>
-						<div class="glass-card flex items-center gap-4 rounded-xl border border-border p-5">
+						<div class="glass-card flex items-center gap-4 rounded-xl border border-line p-5">
 							<div
 								class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg {i === 0
 									? 'bg-accent/15 text-accent'
 									: i === architectureLayers.length - 1
 										? 'bg-primary/15 text-primary'
-										: 'bg-card text-text-muted'}"
+										: 'bg-card text-muted'}"
 							>
 								{#if i === 0}
 									<Database size={18} />
@@ -42,8 +43,8 @@
 								{/if}
 							</div>
 							<div>
-								<h3 id="arch-heading" class="font-semibold text-text">{layer.label}</h3>
-								<p class="text-sm text-text-muted">{layer.description}</p>
+								<h3 class="font-semibold text-foreground">{layer.label}</h3>
+								<p class="text-sm text-muted">{layer.description}</p>
 							</div>
 						</div>
 					</motion.div>
@@ -64,21 +65,21 @@
 			</div>
 
 			<motion.div
-				class="glass-card rounded-2xl border border-border p-8"
+				class="glass-card rounded-2xl border border-line p-8"
 				initial={{ opacity: 0, x: 24 }}
 				whileInView={{ opacity: 1, x: 0 }}
 				viewport={{ once: true }}
 				transition={{ duration: 0.6 }}
 			>
-				<h3 class="text-lg font-semibold text-text">Technology Stack</h3>
-				<p class="mt-2 text-sm text-text-muted">
-					Production-grade components battle-tested across retail forecasting workloads.
+				<h3 class="text-lg font-semibold text-foreground">{sections.architecture.techTitle}</h3>
+				<p class="mt-2 text-sm text-muted">
+					{sections.architecture.techSubtitle}
 				</p>
 
 				<div class="mt-8 flex flex-wrap gap-3">
 					{#each techBadges as badge, i}
 						<motion.span
-							class="rounded-lg border border-border bg-bg/60 px-4 py-2 text-sm font-medium text-text backdrop-blur-sm"
+							class="rounded-lg border border-line bg-surface/60 px-4 py-2 text-sm font-medium text-foreground backdrop-blur-sm"
 							initial={{ opacity: 0, scale: 0.9 }}
 							whileInView={{ opacity: 1, scale: 1 }}
 							viewport={{ once: true }}
@@ -90,18 +91,18 @@
 					{/each}
 				</div>
 
-				<div class="mt-10 space-y-4 rounded-xl border border-border bg-bg/40 p-5">
+				<div class="mt-10 space-y-4 rounded-xl border border-line bg-surface/40 p-5">
 					<div class="flex items-center justify-between text-sm">
-						<span class="text-text-muted">API Latency (p95)</span>
+						<span class="text-muted">{sections.architecture.apiLatency}</span>
 						<span class="font-medium text-emerald-400">142ms</span>
 					</div>
 					<div class="flex items-center justify-between text-sm">
-						<span class="text-text-muted">Model Registry</span>
-						<span class="font-medium text-text">Hybrid v2.4</span>
+						<span class="text-muted">{sections.architecture.modelRegistry}</span>
+						<span class="font-medium text-foreground">Hybrid v2.4</span>
 					</div>
 					<div class="flex items-center justify-between text-sm">
-						<span class="text-text-muted">SKU Coverage</span>
-						<span class="font-medium text-text">12,400+</span>
+						<span class="text-muted">{sections.architecture.skuCoverage}</span>
+						<span class="font-medium text-foreground">12,400+</span>
 					</div>
 					<div class="h-1.5 overflow-hidden rounded-full bg-border">
 						<motion.div
@@ -112,7 +113,7 @@
 							transition={{ duration: 1.2, delay: 0.3 }}
 						></motion.div>
 					</div>
-					<p class="text-xs text-text-muted">System uptime — last 90 days</p>
+					<p class="text-xs text-muted">{sections.architecture.uptime}</p>
 				</div>
 			</motion.div>
 		</div>

@@ -10,7 +10,7 @@
 	} from '@lucide/svelte';
 	import SectionHeader from './SectionHeader.svelte';
 	import GlassCard from './GlassCard.svelte';
-	import { aiCapabilities, shapDrivers } from '$lib/data/content';
+	import { aiCapabilities, modelKpis, sections, shapDrivers, ui } from '$lib/data/content';
 
 	const iconMap: Record<string, typeof Icon> = {
 		'git-branch': GitBranch,
@@ -26,25 +26,26 @@
 <section id="ai-engine" class="section-padding" aria-labelledby="ai-heading">
 	<div class="mx-auto max-w-7xl px-6 lg:px-8">
 		<SectionHeader
-			eyebrow="AI Engine"
-			title="Advanced Machine Learning Forecasting"
-			subtitle="Global panel models with per-SKU residual learning, walk-forward validation, and full SHAP explainability."
+			id="ai-heading"
+			eyebrow={sections.ai.eyebrow}
+			title={sections.ai.title}
+			subtitle={sections.ai.subtitle}
 		/>
 
 		<div class="mb-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
 			{#each aiCapabilities as cap, i}
 				{@const IconComponent = iconMap[cap.icon]}
-				<GlassCard delay={i * 0.06} class="!p-5">
+				<GlassCard class="!p-5">
 					<IconComponent size={20} class="mb-3 text-accent" />
-					<h3 class="text-sm font-semibold text-text">{cap.title}</h3>
-					<p class="mt-1.5 text-xs leading-relaxed text-text-muted">{cap.description}</p>
+					<h3 class="text-sm font-semibold text-foreground">{cap.title}</h3>
+					<p class="mt-1.5 text-xs leading-relaxed text-muted">{cap.description}</p>
 				</GlassCard>
 			{/each}
 		</div>
 
 		<div class="grid gap-8 lg:grid-cols-2">
 			<motion.div
-				class="glass-card rounded-2xl border border-border p-6 sm:p-8"
+				class="glass-card rounded-2xl border border-line p-6 sm:p-8"
 				initial={{ opacity: 0, y: 24 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
@@ -52,8 +53,8 @@
 			>
 				<div class="mb-6 flex items-center justify-between">
 					<div>
-						<h3 id="ai-heading" class="text-lg font-semibold text-text">Model Performance</h3>
-						<p class="text-sm text-text-muted">Walk-forward validation metrics</p>
+						<h3 class="text-lg font-semibold text-foreground">{sections.ai.modelPerformance}</h3>
+						<p class="text-sm text-muted">{sections.ai.walkForward}</p>
 					</div>
 					<div class="flex gap-2">
 						<span class="rounded-md bg-primary/15 px-2.5 py-1 text-xs font-medium text-primary">CatBoost</span>
@@ -62,27 +63,23 @@
 				</div>
 
 				<div class="grid grid-cols-3 gap-4">
-					{#each [
-						{ label: 'WAPE', value: '8.4%', trend: '-2.1%' },
-						{ label: 'MAPE', value: '11.2%', trend: '-1.8%' },
-						{ label: 'Bias', value: '0.3%', trend: 'Stable' }
-					] as kpi, i}
+					{#each modelKpis as kpi, i}
 						<motion.div
-							class="rounded-xl border border-border bg-bg/50 p-4 text-center"
+							class="rounded-xl border border-line bg-surface/50 p-4 text-center"
 							initial={{ opacity: 0, scale: 0.95 }}
 							whileInView={{ opacity: 1, scale: 1 }}
 							viewport={{ once: true }}
 							transition={{ delay: 0.2 + i * 0.1 }}
 						>
-							<p class="text-2xl font-semibold text-text">{kpi.value}</p>
-							<p class="mt-1 text-xs text-text-muted">{kpi.label}</p>
+							<p class="text-2xl font-semibold text-foreground">{kpi.value}</p>
+							<p class="mt-1 text-xs text-muted">{kpi.label}</p>
 							<p class="mt-0.5 text-xs text-emerald-400">{kpi.trend}</p>
 						</motion.div>
 					{/each}
 				</div>
 
-				<div class="mt-6 rounded-xl border border-border bg-bg/30 p-4">
-					<p class="mb-3 text-xs font-medium text-text-muted uppercase tracking-wider">Forecast vs Actual</p>
+				<div class="mt-6 rounded-xl border border-line bg-surface/30 p-4">
+					<p class="mb-3 text-xs font-medium text-muted uppercase tracking-wider">{sections.ai.forecastVsActual}</p>
 					<svg viewBox="0 0 320 100" class="w-full" aria-hidden="true">
 						<defs>
 							<linearGradient id="forecastGrad" x1="0" y1="0" x2="0" y2="1">
@@ -108,22 +105,22 @@
 							stroke-dasharray="4 4"
 						/>
 					</svg>
-					<div class="mt-2 flex gap-4 text-xs text-text-muted">
-						<span class="flex items-center gap-1.5"><span class="h-0.5 w-4 bg-primary"></span> Forecast</span>
-						<span class="flex items-center gap-1.5"><span class="h-0.5 w-4 border-t-2 border-dashed border-accent"></span> Actual</span>
+					<div class="mt-2 flex gap-4 text-xs text-muted">
+						<span class="flex items-center gap-1.5"><span class="h-0.5 w-4 bg-primary"></span> {ui.forecast}</span>
+						<span class="flex items-center gap-1.5"><span class="h-0.5 w-4 border-t-2 border-dashed border-accent"></span> {ui.actual}</span>
 					</div>
 				</div>
 			</motion.div>
 
 			<motion.div
-				class="glass-card rounded-2xl border border-border p-6 sm:p-8"
+				class="glass-card rounded-2xl border border-line p-6 sm:p-8"
 				initial={{ opacity: 0, y: 24 }}
 				whileInView={{ opacity: 1, y: 0 }}
 				viewport={{ once: true }}
 				transition={{ duration: 0.6, delay: 0.15 }}
 			>
-				<h3 class="text-lg font-semibold text-text">Understand Every Prediction</h3>
-				<p class="mt-1 text-sm text-text-muted">SHAP feature importance — SKU #4821 forecast drivers</p>
+				<h3 class="text-lg font-semibold text-foreground">{sections.ai.understandPrediction}</h3>
+				<p class="mt-1 text-sm text-muted">{sections.ai.shapSubtitle}</p>
 
 				<div class="mt-8 space-y-4">
 					{#each shapDrivers as driver, i}
@@ -136,12 +133,12 @@
 							transition={{ delay: 0.1 + i * 0.08 }}
 						>
 							<div class="mb-1.5 flex items-center justify-between text-sm">
-								<span class="text-text">{driver.feature}</span>
+								<span class="text-foreground">{driver.feature}</span>
 								<span class="font-mono text-xs {positive ? 'text-emerald-400' : 'text-rose-400'}">
 									{positive ? '+' : ''}{(driver.impact * 100).toFixed(0)}%
 								</span>
 							</div>
-							<div class="relative h-2 overflow-hidden rounded-full bg-bg">
+							<div class="relative h-2 overflow-hidden rounded-full bg-surface">
 								<motion.div
 									class="absolute top-0 h-full rounded-full {positive
 										? 'left-1/2 bg-gradient-to-r from-primary to-emerald-400'
@@ -158,9 +155,8 @@
 					{/each}
 				</div>
 
-				<p class="mt-6 rounded-lg border border-border bg-bg/40 px-4 py-3 text-xs leading-relaxed text-text-muted">
-					Powered by <span class="text-accent">SHAP</span> — every prediction includes feature-level
-					attribution for audit-ready transparency.
+				<p class="mt-6 rounded-lg border border-line bg-surface/40 px-4 py-3 text-xs leading-relaxed text-muted">
+					{sections.ai.shapNote}
 				</p>
 			</motion.div>
 		</div>
